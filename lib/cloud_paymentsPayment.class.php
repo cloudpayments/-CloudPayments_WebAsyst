@@ -260,8 +260,16 @@ class cloud_paymentsPayment extends waPayment implements waIPayment
     $hidden_fields['failUrl'] = $this->getAdapter()
       ->getBackUrl(waAppPayment::URL_FAIL, $transaction_data);
 
+    $ch = curl_init('https://api.cloudpayments.ru/merchant/configuration/'.$hidden_fields['publicId']);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_HEADER, false);
+    $client = json_decode(curl_exec($ch));
+    curl_close($ch);
+
     $view = wa()->getView();
     $view->assign('hidden_fields', $hidden_fields);
+    $view->assign('widget_url', $client->Model->WidgetUrl ?? 'https://widget.cloudpayments.ru/');
     $view->assign('auto_submit', $auto_submit);
 
     return $view->fetch($this->path.'/templates/payment.html');
