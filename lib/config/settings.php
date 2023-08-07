@@ -166,6 +166,30 @@ return array(
       )
     ),
   ),
+	'widgetCountry' => array(
+		'value'        => 'ru',
+		'title'        => 'Страна магазина',
+		'description'  => 'Укажите страну магазина.',
+		'control_type' => waHtmlControl::SELECT,
+		'options'      => array(
+			array(
+				'value' => 'ru',
+				'title' => 'Россия',
+			),
+			array(
+				'value' => 'kz',
+				'title' => 'Казахстан',
+			),
+			array(
+				'value' => 'uz',
+				'title' => 'Узбекистан',
+			),
+			array(
+				'value' => 'eu',
+				'title' => 'Другое',
+			),
+		)
+	),
   'debugMode'      => array(
     'value'        => '0',
     'title'        => 'Режим отладки плагина',
